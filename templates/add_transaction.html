@@ -1,0 +1,71 @@
+<! DOCTYPE html>
+
+<html>
+	<head> 
+		<title>Add Transaction</title>
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='styles/add_transaction.css') }}" />
+		<script type="text/javascript">
+			function validateLength(inputField,helpText) {
+				if(inputField.value.length<1) {
+					if(helpText!=null)
+						helpText.innerHTML = "This field cannot be empty";
+					return false;
+				}
+				else{
+					if(helpText!=null) {
+						helpText.innerHTML="";
+					}
+				return true;
+				}
+			}
+			
+			function validateBitkhan(inputField,helpText) {
+				if(inputField.value.length<1) {
+					if(helpText!=null)
+						helpText.innerHTML = "This field cannot be empty";
+					return false;
+				}
+				else if(isNaN(inputField.value)) {
+					if(helpText!=null)
+						helpText.innerHTML = "Enter a number please!";
+					return false;
+				}
+				else {
+					if(helpText!=null) {
+						helpText.innerHTML="";
+					}
+				return true;
+				}
+			}
+			
+			function submitTransaction(form) {
+				if(validateLength(form['sender'],form['sender_help']) && validateLength(form['receiver'],form['receiver_help']) && validateBitkhan(form['bitkhan'],form['bitkhan_help'])) {
+				form.submit();
+				return true;
+				}
+				else {
+					alert('We are very sorry but there appears to be some error in your form!');
+					return false;
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="form">
+			<form method="POST">
+				<p>Sender</p>
+				<input id="sender" name="sender" onblur="validateLength(this,document.getElementById('sender_help'));">
+				<span id="sender_help"></span><br>
+				<p>Receiver</p>
+				<input id="receiver" name="receiver" onblur="validateLength(this,document.getElementById('receiver_help'));">
+				<span id="receiver_help"></span><br>
+				<p>Transaction Amount</p>
+				<input id="bitkhan" name="bitkhan" onblur="validateBitkhan(this,document.getElementById('bitkhan_help'));"> bitkhan<br>
+				<span id="bitkhan_help"></span><br>
+				<br>
+				<input type="submit" onClick="return submitTransaction(this.form);">
+			</form>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,38 @@
+<! DOCTYPE html>
+
+<html>
+	<head> 
+		<title>Current Blockchain</title>
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='styles/get_chain.css') }}" />
+	</head>
+
+	<body>
+		<h1 id="top">Your Blockchain</h1>
+		{% for chain in response %}
+		<div class ="displaychain">
+			<p class="blockid">Block ID: {{chain['block_id']}}</p>
+			<p class="nonce">Nonce: {{chain['nonce']}}</p>
+			<p class="timestamp">Time Stamp: {{chain['timestamp']}}</p>
+			<div class="">
+			<h4> Transactions: </h4>
+			{% for transaction in chain['transactions'] %}
+			{% set no_transactions = loop.index %}
+			<p class="no_transactions">{{no_transactions}}</p>
+			<div class="transactions">
+				<p class="sender">Sender: {{transaction['sender']}}</p>
+				<p class="receiver">Receiver: {{transaction['receiver']}}</p>
+				<p class="bitkhan">Bitkhan: {{transaction['bitkhan']}}</p>
+			
+			</div>
+			{% endfor %}
+			</div>
+			<p class="hash">Current Hash: {{chain['hash']}}</p>
+			<p class="hash">Previous Hash: {{chain['previous_hash']}}</p>
+		</div>
+		{% endfor %}
+		<div id="links">
+			<a id="toplink" href="#top">Back to top</a>
+			<a id="toTransactions" href="addtransaction"><button>Add a transaction</button></a>
+		</div>
+	</body>
+</html>

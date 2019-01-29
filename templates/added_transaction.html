@@ -1,0 +1,21 @@
+<! DOCTYPE html>
+
+<html>
+	<head> 
+		<title>Added Transaction</title>
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='styles/added_transaction.css') }}" />
+		<script language="JavaScript"> 
+			
+		</script>
+	</head>
+
+	<body >
+		<h3> You just made a transaction!</h3>
+		<p class="sender">Sender: {{response[0]}}</p>
+		<p class="receiver">Receiver: {{response[1]}}</p>
+		<p class="bitkhan">Amount: {{response[2]}} bitkhan</p>
+		<p class="displaymessage">{{response[3]}}</p>
+		<a href="getchain"><button>Back to home</button></a>
+		<a href="addtransaction"><button>Add Transaction</button></a>
+	</body>
+</html>
